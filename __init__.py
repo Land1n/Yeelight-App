@@ -1,1 +1,1 @@
-"""Browser-based Yeelight client."""
+"""Клиент Yeelight для браузера."""

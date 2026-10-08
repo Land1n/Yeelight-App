@@ -31,7 +31,7 @@ HELP_TEXT = """Доступные команды
 
 
 def local_command(text: str) -> str | None:
-    """Return a local console action, or None for a server command."""
+    """Вернуть локальное действие консоли или None для команды серверу."""
     command = text.strip().casefold()
     if command in {"help", "?"}:
         return "help"
