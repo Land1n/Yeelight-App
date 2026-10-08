@@ -303,6 +303,12 @@ def main(page: ft.Page) -> None:
     async def refresh_clicked(_event) -> None:
         await run_command("list")
 
+    def command_handler(text: str):
+        async def handler(_event) -> None:
+            await run_command(text)
+
+        return handler
+
     command.on_submit = submit_command
     send_button.on_click = submit_command
     refresh_button = ft.Button(
@@ -313,17 +319,17 @@ def main(page: ft.Page) -> None:
     discover_button = ft.Button(
         content=ft.Text("Найти лампы"),
         icon=ft.Icons.SEARCH,
-        on_click=lambda _event: run_command("discover"),
+        on_click=command_handler("discover"),
     )
     clear_button = ft.Button(
         content=ft.Text("Очистить"),
         icon=ft.Icons.DELETE_OUTLINE,
-        on_click=lambda _event: run_command("clear"),
+        on_click=command_handler("clear"),
     )
     help_button = ft.Button(
         content=ft.Text("Справка"),
         icon=ft.Icons.HELP_OUTLINE,
-        on_click=lambda _event: run_command("help"),
+        on_click=command_handler("help"),
     )
 
     header = card(
@@ -427,8 +433,8 @@ def main(page: ft.Page) -> None:
                 ft.Row(
                     [
                         ft.Text("Локальные команды:", size=11, color="#91a0b3"),
-                        ft.TextButton("help", on_click=lambda _event: run_command("help")),
-                        ft.TextButton("clear", on_click=lambda _event: run_command("clear")),
+                        ft.TextButton("help", on_click=command_handler("help")),
+                        ft.TextButton("clear", on_click=command_handler("clear")),
                     ],
                     spacing=2,
                 ),
